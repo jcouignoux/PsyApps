@@ -1,0 +1,19 @@
+{% extends 'apps/item_accordion.html' %}
+{% load bootstrap5 %}
+
+
+{% block accordion_title %}
+    {{ item.id }} - {{ item.title }}
+{% endblock %}
+
+{% block accordion_body %}
+    {% for message in item.get_messages %}
+        <p>{{ message.created_at }} - {{ message.user.username }} - {{ message.message }}</p>
+    {% endfor %}
+    <form action="{% url 'apps:patient' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="subject_id" value="{{ item.id }}" >
+        {% bootstrap_form MForm %}
+        <button type="submit">Envoyer</button>
+    </form>
+{% endblock %}

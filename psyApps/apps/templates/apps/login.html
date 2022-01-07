@@ -1,0 +1,17 @@
+{% extends 'apps/base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {% include "apps/item_alert.html" %}
+        {% endfor %}
+    {% endif %}
+    <div>
+        <form action="{% url 'apps:login' %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form UForm %}
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="accordion accordion-flush" id="{{ accordionId }}">
+    {% for item in list %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ item.id }}">
+                <button class="accordion-button {% if item.id == item_actived %}{% else %} collapsed {% endif %}" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ item.id }}" aria-expanded="{% if item.id == item_actived %} true {% else %} false {% endif %}" aria-controls="collapse{{ item.id }}">
+                    {% block accordion_title %}{% endblock %}
+                </button>
+            </h2>
+            <div id="collapse{{ item.id }}" class="accordion-collapse collapse {% if item.id == item_actived %} show {% else %} {% endif %}"
+                    aria-labelledby="heading{{ item.id }}" data-bs-parent="#{{ accordionId }}">
+                <div class="accordion-body">
+                    {% block accordion_body %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
